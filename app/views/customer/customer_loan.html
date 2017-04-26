@@ -1,0 +1,109 @@
+<div class="panel-header view-header">
+    <button type="button" class="edit" ng-click="goLoanEdit(solcontrol.id, solcontrol_loans[solcontrol.id].id)" title="Edit this customer laon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+    <h4 class="modal-title p10">Loan Info</h4>
+</div>
+<div class="panel">
+    <div class="panel-body view-body">
+
+      <div class="horizontal-bar"></div>
+
+        <div class="view-group">
+            <div class="col-xs-9">
+                <b>Next payment due date:</b>
+                <span class="value">
+                    {{ solcontrol_loans[solcontrol.id].next_installation_date ? solcontrol_loans[solcontrol.id].next_installation_date : 'N/A' }}
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group not_first">
+            <div class="col-xs-9">
+                <b>Installation date:</b>
+                <span class="value">
+                    {{solcontrol_loans[solcontrol.id].installation_date}}
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group not_first">
+            <div class="col-xs-9">
+                <b>Loan start date:</b>
+                <span class="value">
+                    {{solcontrol_loans[solcontrol.id].start_date}}
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group not_first">
+            <div class="col-xs-9">
+                <b>Loan tenure:</b>
+                <span class="value">
+                    {{solcontrol_loans[solcontrol.id].loan_tenure}} days
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group not_first">
+            <div class="col-xs-9">
+                <b>No of installments:</b>
+                <span class="value">
+                    {{solcontrol_loans[solcontrol.id].no_of_installments}}
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group not_first">
+            <div class="col-xs-9">
+                <b>Installment amount:</b>
+                <span class="value">
+                    {{solcontrol_loans[solcontrol.id].installment_amount}} Tk
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group not_first">
+            <div class="col-xs-9">
+                <b>Total service charge:</b>
+                <span class="value">
+                    {{solcontrol_loans[solcontrol.id].total_service_charge}} Tk
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group not_first">
+            <div class="col-xs-9">
+                <b>Down payment:</b>
+                <span class="value">
+                    {{solcontrol_loans[solcontrol.id].downpayment}} Tk
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group not_first">
+            <div class="col-xs-9">
+                <b>System price:</b>
+                <span class="value">
+                    {{solcontrol_loans[solcontrol.id].system_price}} Tk
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group not_first">
+            <div class="col-xs-9">
+                <b>Total system price:</b>
+                <span class="value">
+                    {{solcontrol_loans[solcontrol.id].total_system_price}} Tk
+                </span>
+            </div>
+        </div>
+        <div class="horizontal-bar"></div>
+        <div class="view-group">
+            <div class="col-xs-9">
+                <b>Current Daily Rate:</b>
+                <span class="value">
+                  {{ solcontrol_loans[solcontrol.id].daily_installments }} Tk
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

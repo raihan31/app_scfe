@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="ok()">&times;</button>
+    <h4 class="modal-title"><span style="text-transform: capitalize;">{{agent_name}}</span>'s transaction log</h4>
+</div>
+<div class="modal-body">
+    <div class="panel">
+        <div class="panel-heading pt0 pb0">
+            <div class="text-center col-sm-6">
+                <label class="col-sm-4 pr0" for="dateRange"><b>Date Range:</b></label>
+                <div class="col-sm-8 pl0">
+                    <input name="dateRange" date-range-picker class="form-control date-picker" type="text" placeholder="Date range" ng-model="datePicker.date" clearable="true" ng-change="console.log(datePicker.date)" options="datePicker.opts" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body pt0 pb0">
+        <table datatable="" dt-options="agentTransactionsModalTableCtrl.dtOptions" dt-columns="agentTransactionsModalTableCtrl.dtColumns" dt-column-defs="agentTransactionsModalTableCtrl.dtColumnDefs" class="table table-bordered table-striped" width="100%"></table>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="panel mb0" ng-controller="generateToken">
+    <div class="panel-heading border">
+        <ol class="breadcrumb mb0 no-padding">
+            <li>
+                <a href="#/">Home</a>
+            </li>
+            <li>
+              <a href="#/tokens">Token Man</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="panel">
+    <div class="panel-body">
+      <form ng-submit="createToken(data)" name="tokn_generate">
+          <div class="panel-body">
+              <div class="main_div row">
+                  <div class="col-md-7 col-md-offset-1">
+
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label">Serial Number </label>
+                        <div class="col-sm-7">
+                            <input type="text"  name="serial_number" class="form-control" ng-model="data.serial_number" disabled="true" required>
+                            <p ng-show="tokn_generate.serial_number.$invalid && !tokn_generate.serial_number.$pristine" class="help-block">The serial name is required.</p>
+
+                        </div>
+                    </div>
+
+
+                      <div class="form-group">
+                          <label class="col-sm-5 control-label">Recharge Token </label>
+                          <div class="col-sm-7">
+                              <input type="number"  name="recharge_token" class="form-control" ng-model="data.recharge_token" required>
+                              <p ng-show="tokn_generate.recharge_token.$invalid && !tokn_generate.recharge_token.$pristine" class="help-block">The recharge token is required.</p>
+
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+
+                          <label class="col-sm-5 control-label">Recharge Days</label>
+                          <div class="col-sm-7">
+                              <input type="number" name="recharge_amount_days" class="form-control" ng-model="data.recharge_amount_days"  required>
+                              <p ng-show="tokn_generate.recharge_amount_days.$invalid && !tokn_generate.recharge_amount_days.$pristine" class="help-block">The recharge days is required.</p>
+
+                          </div>
+                      </div>
+
+
+                  </div>
+
+              </div>
+          </div>
+          <div class="panel-footer" ng-show="generated">
+            <div class="text-right">
+              <button class="btn btn-primary" ng-disabled="tokn_generate.$invalid">Generate Token</button>
+            </div>
+          </div>
+      </form>
+      <div class="panel-footer" ng-show="!generated">
+        <div class="text-center">
+          <h3>Generated Token: {{ token }}</h3>
+        </div>
+        <div class="text-right">
+          <form ng-submit="confirmToken(data)">
+            <button type="submit" class="btn btn-primary" ng-disabled="tokn_generate.$invalid">Confirm Token</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>

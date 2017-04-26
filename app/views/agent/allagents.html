@@ -1,0 +1,32 @@
+<div class="panel">
+    <div class="panel-heading border">
+        <ol class="breadcrumb mb0 no-padding">
+            <li>
+                <a href="#/">Home</a>
+            </li>
+            <li>
+                <a href>Agents</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="panel">
+    <div class="panel-heading">
+        <div class="form-group col-sm-3">
+            <label for="branchOfficeSelect"><b>Regional Office</b></label>
+            <select class="form-control" id="regional_officeSelect" name="regional_office" ng-model="selectedRegionalOffice" ng-options="regional_office as regional_office.name for regional_office in regionalOffices track by regional_office.id" ng-change="filterRegionalOffice()">
+                <option value=''>All</option>
+           </select>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="branchOfficeSelect"><b>Branch Office</b></label>
+            <select class="form-control" id="branch_officeSelect" name="branch_office" ng-model="selectedBranchOffice" ng-options="branch_office as branch_office.name for branch_office in branchOffices[selectedRegionalOffice.id] track by branch_office.id" ng-disabled="!selectedRegionalOffice"
+                ng-change="filterBranchOffice()">
+                <option value=''>All</option>
+            </select>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table datatable="" dt-options="allAgentsCtrl.dtOptions" dt-columns="allAgentsCtrl.dtColumns" dt-column-defs="allAgentsCtrl.dtColumnDefs" dt-instance="allAgentsCtrl.dtInstance" class="table table-bordered table-striped" width="100%"></table>
+    </div>
+</div>

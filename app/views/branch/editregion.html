@@ -1,0 +1,100 @@
+
+    <ul class="nav nav-tabs">
+        <li ng-repeat="step in steps" ng-class="{active: $index==fact.getCurrentStepIndex(this)}">
+            <a href>{{step}}</a>
+        </li>
+    </ul>
+    <div ng-switch on="selection" class="panel">
+        <!-- First Step -->
+        <div ng-switch-when="Information" class="animated fadeIn">
+            <form name="editRegionForm" ng-submit="nextStep()" novalidate>
+                <div class="panel-body">
+                    <div class="main_div row">
+
+                        <div class="col-md-7 col-md-offset-1">
+                            <div class="form-group" ng-class="{ 'has-error' : editRegionForm.organisation_name.$invalid && !editRegionForm.organisation_name.$pristine }">
+                                <label class="col-sm-3 control-label">Organisation</label>
+                                <div class="col-sm-7">
+                                    <select
+                                      ng-options="organisation as organisation.name for organisation in organisations track by organisation.id"
+                                      ng-model="selectedOrganisation"
+                                      name="organisation_name"
+                                      class="form-control" ng-change="organisationChange(selectedOrganisation)" required>
+                                      <option value=""> -- Choose region --  </option>
+                                    </select>
+                                    <p ng-show="editRegionForm.organisation_name.$invalid && !editRegionForm.organisation_name.$pristine" class="help-block">The region name is required.</p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error' : editRegionForm.region_name.$invalid && !editRegionForm.region_name.$pristine }">
+                                <label class="col-sm-3 control-label">Region Name</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="region_name" class="form-control" ng-model="regional_office.name" ng-value="region[0].name" required>
+                                    <p ng-show="editRegionForm.region_name.$invalid && !editRegionForm.region_name.$pristine" class="help-block">The region name is required.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="text-right">
+                        <button
+                          type="submit"
+                          class="btn btn-info"
+                          ng-disabled="editRegionForm.$invalid">Next
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-info"
+                          ng-click="editRegionForm.$setPristine(true); region={}">Reset
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Second Step -->
+        <div ng-switch-when="Validation" class="animated fadeIn">
+            <form name="agentPasswordForm" ng-submit="nextStep()" novalidate>
+                <div class="panel-body">
+                    <div class="alert_div col-sm-6">
+                        <h4>Update region</h4>
+                        <p>You are about to update a  region,<br> please enter your password before proceeding.</p>
+                        <div class="form-group" ng-class="{ 'has-error' : (agentPasswordForm.password.$invalid && !agentPasswordForm.password.$pristine) || !passwordMatch }">
+                            <div class="password_field">
+                                <input type="password" class="form-control" ng-model="password.password" placeholder="Password" name="password" required>
+                                <p ng-show="(agentPasswordForm.password.$error.required && !agentPasswordForm.password.$pristine) || !passwordMatch" class="help-block">Invalid password</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-info" data-ng-click="previousStep()">Previous</button>
+                        <button type="submit" class="btn btn-info" ng-disabled="agentPasswordForm.$invalid">Next</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Third Step -->
+        <div ng-switch-when="Confirmation" class="animated fadeIn">
+            <div class="panel-body">
+                <div class="alert_div col-sm-6">
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="text-right">
+                    <button type="button" class="btn btn-info" ng-click="goBack()">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col-md-2 col-md-offset-10">
+        <button type="button" class="btn btn-labeled btn-danger" ng-click="deleteRegion(region[0].id)">
+            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Or Delete Region
+        </button>
+      </div>
+    </div> -->

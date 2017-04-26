@@ -1,0 +1,7 @@
+{
+  "requireCapitalizedConstructors": {
+    "allExcept": ["jsPDF"]
+  },
+  "requireParenthesesAroundIIFE": true,
+  "validateQuoteMarks": "'"
+}

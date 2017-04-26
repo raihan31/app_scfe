@@ -1,0 +1,26 @@
+[{
+    "id": 125,
+    "name": "Shamim",
+    "phone": "00880873612312",
+    "rate_tk_per_days": 3,
+    "last_transaction": "20/07/2016",
+    "balance": 120,
+    "Solcontrollers":[{"id":3},{"id":5}]
+}, {
+    "id": 126,
+    "name": "Kibria",
+    "phone": "00880864321232",
+    "rate_tk_per_days": 2,
+    "last_transaction": "19/07/2016",
+    "balance": 120,
+    "Solcontrollers":[{"id":1}]
+}, {
+    "id": 129,
+    "name": "Swappneel",
+    "phone": "00880824356682",
+    "rate_tk_per_days": 5,
+    "last_transaction": "21/07/2016",
+    "balance": 120,
+    "Solcontrollers":[{"id":2},{"id":4},{"id":5},{"id":6}]
+}
+]

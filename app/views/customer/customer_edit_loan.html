@@ -1,0 +1,90 @@
+<div class="panel-header view-header" id="loanEditPanel">
+    <button type="button" class="edit" ng-click="goLoanEditCancel()" title="Cancel "><i class="fa fa-times" aria-hidden="true"></i></button>
+    <h4 class="modal-title p10">Loan Info</h4>
+</div>
+<div class="panel">
+    <form name="loanEditForm" ng-submit="editLoan()" novalidate>
+        <div class="panel-body view-body">
+
+            <div class="form-group" ng-class="{ 'has-error' : loanEditForm.start_date.$invalid && !loanEditForm.start_date.$pristine }" style="overflow: visible; height: 40px">
+                <label class="col-sm-4 control-label">Start Date</label>
+                <div class="col-sm-8">
+                    <p class="input-group">
+                        <input type="text" name="start_date" class="form-control" ng-model="solcontroller_loan.start_date" uib-datepicker-popup is-open="calenderPopup.startDate" required>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="calenderOpen('startDate')"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </p>
+                    <p ng-show="loanEditForm.start_date.$invalid && !loanEditForm.start_date.$pristine" class="help-block">The start date is required.</p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : loanEditForm.stop_date.$invalid && !loanEditForm.stop_date.$pristine }" style="overflow: visible; height: 40px">
+                <label class="col-sm-4 control-label">Stop Date</label>
+                <div class="col-sm-8">
+                    <p class="input-group">
+                        <input type="text" name="stop_date" class="form-control" ng-model="solcontroller_loan.stop_date" uib-datepicker-popup is-open="calenderPopup.stopDate" required>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="calenderOpen('stopDate')"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </p>
+                    <p ng-show="loanEditForm.stop_date.$invalid && !loanEditForm.stop_date.$pristine" class="help-block">The stop date is required.</p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : loanEditForm.installation_date.$invalid && !loanEditForm.installation_date.$pristine }" style="overflow: visible; height: 40px">
+                <label class="col-sm-4 control-label">Installation Date</label>
+                <div class="col-sm-8">
+                    <p class="input-group">
+                        <input type="text" name="installation_date" class="form-control" ng-model="solcontroller_loan.installation_date" uib-datepicker-popup is-open="calenderPopup.installationDate" required />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="calenderOpen('installationDate')"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </p>
+                    <p ng-show="loanEditForm.installation_date.$invalid && !loanEditForm.installation_date.$pristine" class="help-block">The installation date is required.</p>
+                </div>
+            </div>
+
+            <div class="form-group" style="overflow: visible; height: 40px">
+                <label class="col-sm-4 control-label">Next Payment Due Date</label>
+                <div class="col-sm-8">
+                    <p class="input-group">
+                        <span class="input-group-addon">Optional</span>
+                        <input type="text" name="next_installation_date" class="form-control" ng-model="solcontroller_loan.next_installation_date" uib-datepicker-popup is-open="calenderPopup.nextInstallationDate">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="calenderOpen('nextInstallationDate')"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : loanEditForm.no_of_installments.$invalid && !loanEditForm.no_of_installments.$pristine }" style="overflow: visible; height: 40px">
+                <label class="col-sm-4 control-label">No of Installments</label>
+                <div class="col-sm-8">
+                    <input type="number" min=0 name="no_of_installments" class="form-control" ng-model="solcontroller_loan.no_of_installments" required>
+                    <p ng-show="loanEditForm.no_of_installments.$invalid && !loanEditForm.no_of_installments.$pristine" class="help-block">The no of installment is required.</p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : loanEditForm.installment_amount.$invalid && !loanEditForm.installment_amount.$pristine }" style="overflow: visible; height: 40px">
+                <label class="col-sm-4 control-label">Installment amount</label>
+                <div class="col-sm-8">
+                    <input type="number" min=0 name="installment_amount" class="form-control" ng-model="solcontroller_loan.installment_amount" required>
+                    <p ng-show="loanEditForm.installment_amount.$invalid && !loanEditForm.installment_amount.$pristine" class="help-block">The installment amount is required.</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : loanEditForm.downpayment.$invalid && !loanEditForm.downpayment.$pristine }" style="overflow: visible; height: 40px">
+                <label class="col-sm-4 control-label">Downpayment</label>
+                <div class="col-sm-8">
+                    <input type="number" min=0 name="downpayment" class="form-control" ng-model="solcontroller_loan.downpayment" required>
+                    <p ng-show="loanEditForm.downpayment.$invalid && !loanEditForm.downpayment.$pristine" class="help-block">The downpayment is required.</p>
+                </div>
+            </div>
+            <div class="form-group" style="overflow: visible; height: 40px">
+                <div class="text-right">
+                    <button type="submit" ng-disabled="loanEditForm.$invalid" class="btn btn-info">Update loan</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

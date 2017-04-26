@@ -1,0 +1,288 @@
+<div class="panel mb0">
+    <div class="panel-heading border">
+        <ol class="breadcrumb mb0 no-padding">
+            <li>
+                <a href="#/">Home</a>
+            </li>
+            <li>
+                <a href>Customer {{customer_id}}</a>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="panel text-center pt20 pb20" ng-hide="!loading">
+    <div class="loader-inner ball-pulse">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<div class="main_div" ng-hide="loading">
+    <div class="row">
+        <!-- Customer Data -->
+        <div class="col-sm-7">
+            <div class="panel-header view-header">
+                <!-- Delete button only for solshare super user -->
+                <button type="button" class="delete" ng-click="delete(customer_id)" title="Delete this customer" ng-show="globals.currentUser.user.organisation === 'SOLshare'"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                <button type="button" class="edit" ng-click="goEdit(customer_id)" title="Edit this customer"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                <h4 class="modal-title pt10 pb10">Customer {{customer_id}}</h4>
+                <div ng-repeat="solcontrol in solcontrols">
+                    <h4 class="modal-title  pb10">SOLcontrol {{solcontrol.serial_number}}</h4>
+                </div>
+
+            </div>
+            <div class="panel">
+                <div class="panel-body view-body">
+                    <div class="view-group">
+                        <div class="col-xs-9">
+                            <img src="images/female_icon.png" title="Female" class="body_icon" ng-hide="customer.gender_id === 2" style="margin-left: 5px;margin-right: 5px;">
+                            <img src="images/male_icon.png" title="Male" class="body_icon" ng-show="customer.gender_id === 2" style="margin-left: 5px;margin-right: 5px;">
+                            <span class=" value" style="text-transform: capitalize;">
+                                {{customer.name}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="horizontal-bar"></div>
+                    <div class="view-group not_first">
+                        <div class="col-xs-9">
+                            <img src="images/phone_icon.png" class="body_icon">
+                            <span class="value">
+                                {{customer.phone}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="horizontal-bar"></div>
+                    <div class="view-group not_first">
+                        <div class="col-xs-9">
+                            <img src="images/address_icon.png" class="body_icon">
+                            <span class="value">
+                                {{address}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="horizontal-bar"></div>
+                    <div class="view-group not_first">
+                        <div class="col-xs-9">
+                            <img src="images/cardid_icon.png" class="body_icon">
+                            <span class="value" ng-show="customer.national_id">
+                                <b>National ID number:</b> {{customer.national_id}}
+                            </span>
+                            <span class="value" ng-hide="customer.national_id">
+                                <b>National ID number:</b> <i>N/A</i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="horizontal-bar"></div>
+                    <div class="view-group not_first">
+                        <div class="col-xs-9">
+                            <img src="images/date_icon.png" class="body_icon">
+                            <span class="value" ng-show="customer.date_of_birth">
+                                <b>Date of Birth:</b> {{customer.date_of_birth}}
+                            </span>
+                            <span class="value" ng-hide="customer.date_of_birth">
+                                <b>Date of Birth:</b> <i>N/A</i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="horizontal-bar"></div>
+                    <div class="view-group not_first">
+                        <div class="col-xs-9">
+                            <img src="images/address_icon.png" class="body_icon">
+                            <span class="value">
+                                <span ng-show="customer.male_household_members == 1 || customer.male_household_members == 0">
+                                    {{customer.male_household_members}} male and
+                                </span>
+                            <span ng-show="customer.male_household_members > 1">
+                                    {{customer.male_household_members}} males and
+                                </span>
+                            <span ng-show="customer.female_household_members == 1 || customer.female_household_members == 0">
+                                    {{customer.female_household_members}} female in the household
+                                </span>
+                            <span ng-show="customer.female_household_members > 1">
+                                    {{customer.female_household_members}} females in the household
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="horizontal-bar"></div>
+                    <div class="view-group not_first">
+                        <div class="col-xs-9">
+                            <img src="images/lightbulb_icon.png" class="body_icon">
+                            <span class="value">
+                                <b>Energy Source:</b> {{customer.energy_source}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent Data -->
+        <div class="col-sm-5">
+            <div class="panel-header view-header">
+                <h4 class="modal-title p10">Agent {{agent_id}}</h4>
+            </div>
+            <div class="panel">
+                <div class="panel-body view-body">
+                    <div class="view-group">
+                        <div class="col-xs-9">
+                            <img src="images/female_icon.png" title="Female" class="body_icon" ng-hide="agent.gender_id === 2" style="margin-left: 5px;margin-right: 5px;">
+                            <img src="images/male_icon.png" title="Male" class="body_icon" ng-show="agent.gender_id === 2" style="margin-left: 5px;margin-right: 5px;">
+                            <span class=" value" style="text-transform: capitalize;">
+                                {{agent.name}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="horizontal-bar"></div>
+                    <div class="view-group not_first">
+                        <div class="col-xs-9">
+                            <img src="images/phone_icon.png" class="body_icon">
+                            <span class="value">
+                                {{agent.phone}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="horizontal-bar"></div>
+                    <div class="view-group not_first">
+                        <div class="col-xs-9">
+                            <b>Branch office:</b>
+                            <span class="value">
+                                {{agent.branch_office}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="horizontal-bar"></div>
+                    <div class="view-group not_first">
+                        <div class="col-xs-9">
+                            <b>Regional office:</b>
+                            <span class="value">
+                                {{agent.regional_office}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-repeat="solcontrol in solcontrols">
+        <div class="row">
+            <!-- SOlcontrol Data -->
+            <div class="col-sm-6">
+                <div class="panel-header view-header">
+                    <h4 class="modal-title p10">SOLcontrol {{solcontrol.serial_number}}</h4>
+                </div>
+                <div class="panel">
+                    <div class="panel-body view-body">
+                        <div class="view-group">
+                            <div class="col-xs-9">
+                                <b> Outstanding balance:</b>
+                                <span class="value">
+                                    {{solcontrol.outstanding_balance}} Tk
+                                </span>
+                            </div>
+                        </div>
+                        <div class="horizontal-bar"></div>
+                        <div class="view-group not_first">
+                            <div class="col-xs-9">
+                                <b>Battery size:</b>
+                                <span class="value">
+                                    {{solcontrol.batt_size}} Ah
+                                </span>
+                            </div>
+                        </div>
+                        <div class="horizontal-bar"></div>
+                        <div class="view-group not_first">
+                            <div class="col-xs-9">
+                                <b>Panel size:</b>
+                                <span class="value">
+                                    {{solcontrol.panel_size}} Wp
+                                </span>
+                            </div>
+                        </div>
+                        <div class="horizontal-bar"></div>
+                        <div class="view-group not_first">
+                            <div class="col-xs-9">
+                                <b>GPS location:</b>
+                                <span class="value" ng-show="(solcontrol.lat !== '-90.0') && (solcontrol.long !== '0.0')">
+                                    {{solcontrol.lat}}, {{solcontrol.long}}
+                                </span>
+                                <span class="value" ng-hide="(solcontrol.lat !== '-90.0') && (solcontrol.long !== '0.0')">
+                                    <i>N/A</i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel" ng-show="globals.currentUser.user.organisation === 'SOLshare'">
+                    <div class="panel-heading">
+                        <h3 class="text-center">SOLshare Customer Admin</h3>
+                    </div>
+                    <div class="panel-body view-body">
+                        <div class="view-group">
+                            <div class="col-md-8 form-group">
+                                <input type="number" min=0 class="form-control" ng-model="installmentAmount" name="installment" placeholder="Installment amount" required>
+                            </div>
+                            <div class="col-md-4">
+                                <button ng-disabled="!installmentAmount" class="btn btn-info" ng-click="saveInstallmentAmount(installmentAmount, solcontrol)">New installment</button>
+                            </div>
+                        </div>
+                        <div class="view-group">
+                            <div class="col-md-8 form-group">
+                                <input type="number" min=0 class="form-control" ng-model="downpaymentAmount" name="downpayment" placeholder="Downpayment amount" required>
+                            </div>
+                            <div class="col-md-4">
+                                <button ng-disabled="!downpaymentAmount" class="btn btn-info" ng-click="saveDownpaymentAmount(downpaymentAmount, solcontrol)">New downpayment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SOLcontrol Loan data -->
+            <div class="col-sm-6" ng-show="solcontrol_loans[solcontrol.id].is_sales_type_cash">
+                <div class="panel-header view-header">
+                    <h4 class="modal-title p10">Loan Info</h4>
+                </div>
+                <div class="panel">
+                    <div class="panel-body view-body">
+                        <div class="view-group">
+                            <div class="col-xs-9">
+                                <b>No loan - System payed upfront</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-hide="solcontrol_loans[solcontrol.id].is_sales_type_cash">
+                <div ui-view="customerLoan"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="panel mt10">
+    <div class="panel-body">
+        <table datatable="" dt-options="viewCustomerCtrl.dtOptions" dt-columns="viewCustomerCtrl.dtColumns" dt-instance="viewCustomerCtrl.dtInstance" class="table table-bordered table-striped" width="100%">
+            <tfoot>
+                <tr></tr>
+                <tr>
+                    <th style="text-align:right">Total Paid:
+                        <span ng-hide="!loading" class="loader-inner ball-pulse"><div></div><div></div><div></div></span>
+                        <span ng-hide="loading">{{ transactions.short_ledger.total_paid | number }} Tk</span>
+                    </th>
+                </tr>
+                <tr>
+                    <th style="text-align:right">Total due:
+                        <span ng-hide="!loading" class="loader-inner ball-pulse"><div></div><div></div><div></div></span>
+                        <span ng-hide="loading">{{ transactions.short_ledger.total_due | number }} Tk</span>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

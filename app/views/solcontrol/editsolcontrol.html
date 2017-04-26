@@ -1,0 +1,71 @@
+<div id="editsolcontrol" data-ng-controller="editsolcontrol">
+    <ul class="nav nav-tabs">
+        <li ng-repeat="step in steps" ng-class="{active: $index==fact.getCurrentStepIndex(this)}">
+            <a href>{{step}}</a>
+        </li>
+    </ul>
+    <div ng-switch on="selection" class="panel">
+        <!-- First Step -->
+        <div ng-switch-when="Information" class="animated fadeIn">
+            <form  name="solcontrolForm" ng-submit="nextStep()" novalidate>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <!-- <div class="form-group" ng-class="{ 'has-error' : solcontrolForm.panel_size.$invalid && !solcontrolForm.panel_size.$pristine }">
+                            <label class="col-sm-3 control-label">Panel Size</label>
+                            <div class="col-sm-8">
+                                <input type="number" name="panel_size" class="form-control" ng-model="solcontrol.panel_size" required>
+                                <p ng-show="solcontrolForm.panel_size.$invalid && !solcontrolForm.panel_size.$pristine" class="help-block">The panel size is required.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error' : solcontrolForm.batt_size.$invalid && !solcontrolForm.batt_size.$pristine }">
+                            <label class="col-sm-3 control-label">Battery Size</label>
+                            <div class="col-sm-8">
+                                <input type="number" name="batt_size" class="form-control" ng-model="solcontrol.batt_size" required>
+                                <p ng-show="solcontrolForm.batt_size.$invalid && !solcontrolForm.batt_size.$pristine" class="help-block">The battery size is required.</p>
+                            </div>
+                        </div> -->
+
+                       <!--  <div class="form-group-sam-select">
+                            <label class="col-sm-3 control-label" style="line-height:12px;">Customer<br></label>
+                            <div class="col-sm-8">
+                                <angucomplete-alt id="angucomplete"
+                                  placeholder="Select Customer"
+                                  pause="100"
+                                  local-data="customers"
+                                  selected-object="customerSelected"
+                                  search-fields="Account.name"
+                                  title-field="Account.name"
+                                  minlength="1"
+                                  input-class="form-control form-control-small"
+                                  initial-value="originalCustomer"></angucomplete-alt>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group" ng-class="{ 'has-error' : solcontrolForm.customer.$invalid && !solcontrolForm.customer.$pristine }">
+                            <label class="col-sm-4 control-label">Customer ID</label>
+                            <div class="col-sm-3">
+                                <input type="number" name="customer" class="form-control" ng-model="solcontrol.Solcontroller.customer_id" required>
+                                <p ng-show="solcontrolForm.customer.$invalid && !solcontrolForm.customer.$pristine" class="help-block">The customer size is required.</p>
+                            </div>
+                            <button type="button" class="btn btn-info col-sm-5" ng-click="removeCustomer()">Remove customer</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-info" ng-disabled="solcontrolForm.$invalid">Next</button>
+                        <button type="button" class="btn btn-info" ng-click="solcontrolForm.$setPristine(true); solcontrol={};">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Second Step -->
+        <div ng-switch-when="Confirmation" ng-init="include = true">
+            <div ng-include src="'views/solcontrol/viewsolcontrol.html'"></div>
+        </div>
+    </div>
+</div>
+

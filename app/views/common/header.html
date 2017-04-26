@@ -1,0 +1,41 @@
+<div class="brand visible-xs">
+
+  <!-- toggle offscreen menu -->
+  <div class="toggle-offscreen">
+    <offscreen class="visible-xs"></offscreen>
+  </div>
+  <!-- /toggle offscreen menu -->
+
+  <!-- logo -->
+  <div class="brand-logo">
+    <img data-ng-src="images/logo.png" height="30" alt="">
+  </div>
+  <!-- /logo -->
+
+</div>
+
+<ul class="nav navbar-nav hidden-xs">
+  <li>
+    <p class="navbar-text">
+      {{$state.current.data.title}}
+    </p>
+  </li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right hidden-xs">
+   <li class="dropdown" uib-dropdown>
+    <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle>
+      <div class="pull-left">
+        <span style="text-transform: capitalize;">
+            {{globals.currentUser.user.name}} - {{globals.currentUser.user.organisation}}
+        </span>
+      </div>
+      <span class="header-avatar"><img src="images/profile_icon.png"></img></span>
+    </a>
+    <ul class="dropdown-menu" uib-dropdown-menu>
+      <li>
+        <a ui-sref="login" href="#/login">Logout</a>
+      </li>
+    </ul>
+  </li>
+</ul>

@@ -1,0 +1,20 @@
+<div class="panel">
+	<div class="panel-heading border">
+		<ol class="breadcrumb mb0 no-padding">
+			<li>
+				<a href="#/">Home</a>
+			</li>
+			<li>
+				<a href>SOLshare Panel</a>
+			</li>
+		</ol>
+	</div>
+
+    <div class="mt10 ml10">
+        <button type="button" class="btn btn-info" ng-click="saveJSON()" ng-disabled="json === {}">Download JSON</button>
+    </div>
+
+    <div class="panel-body">
+    	<table datatable="" dt-options="allDevicesCtrl.dtOptions" dt-columns="allDevicesCtrl.dtColumns" class="table table-bordered table-striped" width="100%"></table>
+    </div>
+</div>

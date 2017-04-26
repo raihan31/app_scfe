@@ -1,0 +1,196 @@
+<div class="brand">
+
+  <!-- logo -->
+  <div class="brand-logo">
+    <a href="#/">
+      <img data-ng-src="images/logo.png" height="30" alt="">
+    </a>
+  </div>
+  <!-- /logo -->
+
+  <!-- toggle small sidebar menu -->
+  <a href="javascript:;" class="toggle-sidebar hidden-xs hamburger-icon v3" data-ng-click="app.layout.isSmallSidebar = !app.layout.isSmallSidebar">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </a>
+  <!-- /toggle small sidebar menu -->
+
+</div>
+
+<!-- main navigation -->
+<nav role="navigation" side-navigation>
+
+  <ul class="nav">
+
+    <!-- dashboard -->
+    <!-- <li ui-sref-active="active">
+      <a href="#/">
+        <i class="fa fa-cust_dashboard"></i>
+        <span>Dashboard</span>
+      </a>
+    </li> -->
+    <!-- /dashboard -->
+
+    <!-- Customer -->
+    <!-- <li data-ng-class="{open: $state.includes('app.customer')}">
+      <a href="javascript:;">
+        <i class="fa fa-cust_customer"></i>
+        <span>Customers</span>
+      </a>
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.customer.allcustomers">
+            <span>All customers</span>
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="app.customer.newcustomer">
+            <span>New customer</span>
+          </a>
+        </li>
+      </ul>
+    </li> -->
+    <!-- /customer -->
+
+    <!-- solcontrol -->
+    <li data-ng-class="{open: $state.includes('app.solcontrol')}">
+      <!-- <a href="javascript:;"> -->
+      <a ui-sref="app.solcontrol.allsolcontrols">
+        <i class="fa fa-cust_solcontrol"></i>
+        <span>Portfolio</span>
+      </a>
+      <!-- <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.solcontrol.allsolcontrols">
+            <span>All SOLcontrols</span>
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="app.solcontrol.newsolcontrol">
+            <span>New SOLcontrol</span>
+          </a>
+        </li>
+      </ul> -->
+    </li>
+    <!-- /solcontrol -->
+
+    <!-- Agent -->
+    <li data-ng-class="{open: $state.includes('app.agent')}">
+      <a href="javascript:;">
+        <i class="fa fa-cust_agent"></i>
+        <span>Agents</span>
+      </a>
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.agent.allagents">
+            <span>All agents</span>
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="app.agent.newagent">
+            <span>New agent</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- /Agent -->
+
+    <!-- Branch -->
+    <li data-ng-class="{open: $state.includes('app.branch')}" ng-show="globals.currentUser.user.organisation === 'SOLshare'">
+      <a href="javascript:;">
+        <i class="fa fa-arrows"></i>
+        <span>Branch</span>
+      </a>
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.branch.allbranches">
+            <span>All branch</span>
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="app.branch.newbranch">
+            <span>New branch</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- /Branch -->
+
+    <!-- Transaction -->
+    <li data-ng-class="{open: $state.includes('app.transaction')}">
+      <a href="javascript:;">
+        <i class="fa fa-cust_transaction"></i>
+        <span>Transaction</span>
+      </a>
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.transaction.alltransactions">
+            <span>Transaction log</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- /transaction -->
+
+    <!-- Only for SOLshare account -->
+    <li data-ng-class="{open: $state.includes('app.solshare')}" ng-show="globals.currentUser.user.organisation === 'SOLshare'">
+      <a href="javascript:;">
+        <i class="fa fa-cust_solshare"></i>
+        <span>SOLshare Panel</span>
+      </a>
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.solshare.alldevices">
+            <span>All devices</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- Ticket -->
+<!--     <li data-ng-class="{open: $state.includes('app.ticket')}">
+      <a href="javascript:;">
+        <i class="fa fa-cust_ticket"></i>
+        <span>Ticket</span>
+      </a>
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.ticket.alltickets">
+            <span>All tickets</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    /ticket
+
+    Visit
+    <li data-ng-class="{open: $state.includes('app.visit')}">
+      <a href="javascript:;">
+        <i class="fa fa-cust_visit"></i>
+        <span>Visit</span>
+      </a>
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.visit.allvisits">
+            <span>All visits</span>
+          </a>
+        </li>
+      </ul>
+    </li> -->
+    <!-- /visit -->
+
+    <!-- FEtoken Man -->
+    <li data-ng-class="{open: $state.includes('app.token')}" ng-show="globals.currentUser.user.organisation === 'SOLshare'">
+      <!-- <a href="javascript:;"> -->
+      <a ui-sref="app.token.alltoken">
+        <i class="fa fa-archive"></i>
+        <span>Token Man</span>
+      </a>
+    </li>
+    <!-- /FEtoken Man -->
+
+  </ul>
+</nav>
+<!-- /main navigation -->

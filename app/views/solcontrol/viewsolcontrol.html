@@ -1,0 +1,52 @@
+<div class="modal-header view-header" ng-hide="include" >
+    <button type="button" class="close" ng-click="ok()">&times;</button>
+    <img src="images/agent_icon_big.png" class="title_icon">
+    <h4 class="modal-title">SOLcontrol {{solcontrol.Solcontroller.serial_number}}</h4>
+</div>
+<div class="modal-body view-body">
+    <div class="view-group not_first">
+        <div class="col-xs-8">
+            <!-- <img src="images/phone_icon.png" class="body_icon"> -->
+            <span class="value" ng-show="solcontrol.Solcontroller.customer_id">
+                Customer ID: {{solcontrol.Solcontroller.customer_id}}
+            </span>
+            <span class="value" ng-show="!solcontrol.Solcontroller.customer_id">
+                <i>No Customer</i>
+            </span>
+        </div>
+    </div>
+    <div class="horizontal-bar"></div>
+    <div class="view-group not_first">
+        <div class="col-xs-8">
+            <!-- <img src="images/address_icon.png" class="body_icon"> -->
+            <span class="value">
+                Panel Size: {{solcontrol.Solcontroller.panel_size}}
+            </span>
+        </div>
+    </div>
+    <div class="horizontal-bar"></div>
+    <div class="view-group not_first">
+        <div class="col-xs-8">
+            <!-- <img src="images/address_icon.png" class="body_icon"> -->
+            <span class="value">
+                Battery Size: {{solcontrol.Solcontroller.batt_size}}
+            </span>
+        </div>
+    </div>
+    <div class="horizontal-bar"></div>
+    <div class="view-group not_first">
+        <div class="col-xs-8">
+            <!-- <img src="images/address_icon.png" class="body_icon"> -->
+            <span class="value">
+                Outstanding Balance: {{solcontrol.Solcontroller.outstanding_balance}}
+            </span>
+        </div>
+    </div>
+</div>
+
+ <!-- Bottom Buttons -->
+<!-- <div class="modal-footer" ng-hide="include">
+    <div class="text-right">
+        <a href class="btn btn-info" ng-click="goEdit()">Edit</a>
+    </div>
+</div> -->

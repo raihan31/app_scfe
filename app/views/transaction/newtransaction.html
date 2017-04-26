@@ -1,0 +1,83 @@
+<div data-ng-controller="newtransaction">
+<form class="form-new" name="newTransaction" id="newTransaction" novalidate>
+			<ul class="nav nav-tabs">
+				<li ng-repeat="step in steps" ng-class="{active: $index==fact.getCurrentStepIndex(this)}">
+					<a href>{{step}}</a>
+				</li>
+			</ul>
+		<div ng-switch on="selection" class="panel" >
+			<div class="panel-body">
+				<!-- First Step -->
+				<div ng-switch-when="Information">
+					<div class="main_div">
+
+						<div class="form-group"> 
+							<label class="col-sm-2 control-label">Amount</label> 
+							<div class="col-sm-4"> 
+								<input type="text" class="form-control" id="ta_amount" name="ta_amount" ng-model="transaction.ta_amount">
+								<span class="errhide">The transaction amount is required.</span> 
+							</div> 
+						</div>
+				
+						<div class="form-group">
+							<label class="col-sm-2 control-label">SOLbox</label> 
+							<div class="col-sm-4"> 
+								<select class="form-control" id="solbox_id" ng-model="transaction.solbox_id">
+									<option value=''>Select</option>
+									<option ng-repeat="solbox in solboxes" value="{{solbox.Solbox.id}}">SOLbox {{solbox.Solbox.id}}</option>
+								</select>
+								<span class="errhide">The software version is required.</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Second Step -->
+				<div ng-switch-when="Validation">
+						<div class="alert_div col-sm-6">
+							<h4>Create a new Transaction</h4>
+							<p>You are about to create a new Transaction,<br> please enter your password before proceeding.</p>
+							<div class="form-group">
+								<div class=password_field> 
+									<input type="password" class="form-control" ng-model="password" placeholder="Password" id="password">
+									<span class="errhide">Invalid password</span> 
+								</div>
+							</div>
+						</div>
+				</div>
+
+				<!-- Third Step -->
+				<div ng-switch-when="Confirmation">
+						<div class="alert_div col-sm-6">
+							<h4>A new Transaction has been created!</h4>
+							<p>Transaction Id: {{createdTransaction.id}}</p> 
+						</div>
+				</div>
+			</div>
+			<!-- Bottom Buttons -->
+			<div class="panel-footer">
+				<div ng-hide="selection == 'Confirmation'" class="text-right">
+					<a href class="btn btn-info" ng-disabled="!fact.hasPreviousStep(this) || !fact.hasNextStep(this)" ng-click="fact.decrementStep(this)">Previous</a>
+
+					<a href class="btn btn-info" ng-disabled="!fact.hasNextStep(this)" ng-click="nextStep()">Next</a>
+
+					<a href class="btn btn-info" ng-disabled="!fact.hasNextStep(this)" ng-click="cancel()">Cancel</a>
+				</div>
+
+				<div ng-hide="selection != 'Confirmation'" class="text-right">
+					<a href class="btn btn-info" ng-click="goBack()">Back</a>
+				</div>
+			</div>
+		</div> 
+ 	</form>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$(".cancelStep").click(function(event) {
+			event.preventDefault(); 
+			$('#newTransaction')[0].reset();
+		});
+	}); 
+</script>
+</div>   

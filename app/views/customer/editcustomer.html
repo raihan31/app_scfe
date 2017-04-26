@@ -1,0 +1,170 @@
+<div id="editcustomer" data-ng-controller="editcustomer">
+    <div class="panel mb0">
+        <div class="panel-heading border">
+            <ol class="breadcrumb mb0 no-padding">
+                <li>
+                    <a href="#/">Home</a>
+                </li>
+                <li>
+                    <a ui-sref="app.customer.viewcustomer({customer_id: customer_id})" >Customer {{customer_id}}</a>
+                </li>
+                <li>
+                    <a href >Edit</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="panel text-center pt20 pb20" ng-hide="!loading">
+        <div class="loader-inner ball-pulse"><div></div><div></div><div></div></div>
+    </div>
+    <div class="panel animated fadeIn" ng-hide="loading">
+        <form name="customerForm" ng-submit="nextStep()" novalidate>
+            <div class="panel-body">
+                <div class="main_div row">
+                    <div class="col-md-6">
+                        <h4 class="text-center">General Information</h4>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.first_name.$invalid && !customerForm.first_name.$pristine }">
+                            <label class="col-sm-4 control-label">First Name</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <input type="text" name="first_name" class="form-control" ng-model="customer_names.first_name" required>
+                                <p ng-show="customerForm.first_name.$invalid && !customerForm.first_name.$pristine" class="help-block">The first name is required.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.last_name.$invalid && !customerForm.last_name.$pristine }">
+                            <label class="col-sm-4 control-label">Last Name</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <input type="text" name="last_name" class="form-control" ng-model="customer_names.last_name" required>
+                                <p ng-show="customerForm.last_name.$invalid && !customerForm.last_name.$pristine" class="help-block">The last name is required.</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.gender.$invalid && !customerForm.gender.$pristine }">
+                            <label class="col-sm-4 control-label">Gender</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <select class="form-control" name="gender" ng-model="customer.customer.gender_id" required>
+                                    <option value=''>Select</option>
+                                    <option value='1'>Female</option>
+                                    <option value='2'>Male</option>
+                                </select>
+                                <p ng-show="customerForm.gender.$error.required && !customerForm.gender.$pristine" class="help-block">The gender is required.</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.phone.$invalid && !customerForm.phone.$pristine }">
+                            <label class="col-sm-4 control-label">Telephone</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <input type="text" class="form-control" name="phone"  ng-model="customer.customer.phone" placeholder="00880..." required ng-pattern="/0([0-9]{5,15})/">
+                                <span ng-show="customerForm.phone.$error.required && !customerForm.phone.$pristine" class="help-block">The telephone number is required.</span>
+                                <span ng-show="customerForm.phone.$error.pattern && !customerForm.phone.$pristine" class="help-block">The telephone number is not correct.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.national_id.$invalid && !customerForm.national_id.$pristine }">
+                            <label class="col-sm-4 control-label">National ID</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <p class="input-group">
+                                    <span class="input-group-addon">Optional</span>
+                                    <input type="text" class="form-control" name="national_id" ng-model="customer.customer.national_id" ng-pattern="/[0-9]{13,17}/">
+                                </p>
+                                <span ng-show="customerForm.national_id.$error.pattern && !customerForm.national_id.$pristine" class="help-block">The national ID is not correct.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.dob.$invalid && !customerForm.dob.$pristine }" style="overflow: visible; height: 56px;">
+                            <label class="col-sm-4 control-label">Date of birth</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <p class="input-group">
+                                    <span class="input-group-addon">Optional</span>
+                                    <input type="text" class="form-control" uib-datepicker-popup ng-model="customer.customer.date_of_birth" is-open="popupDOB.opened" show-button-bar="false" />
+                                    <span class="input-group-btn">
+                                      <button type="button" class="btn btn-default" ng-click="openDOB()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <h4 class="text-center">Household Information</h4>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.energy_source.$invalid && !customerForm.energy_source.$pristine }">
+                            <label class="col-sm-4 control-label">Main Energy Source</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <select class="form-control" id="energySourceSelect" name="energy_source" ng-model="customer_energy_source.selectedEnergySource" ng-options="energy_source as energy_source.name for energy_source in energy_sources track by energy_source.id" >
+                                    <option value=''>Select</option>
+                                </select>
+                                <span ng-show="customerForm.energy_source.$error.required && !customerForm.energy_source.$pristine" class="help-block">The energy source is required.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.male_household_members.$invalid && !customerForm.male_household_members.$pristine }">
+                            <label class="col-sm-4 control-label">Male Household members</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <input type="number" min=0 class="form-control" ng-model="customer.customer.male_household_members" name="male_household_members" required >
+                                <span ng-show="customerForm.male_household_members.$error.required && !customerForm.male_household_members.$pristine" class="help-block">The number of male household member is required.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.female_household_members.$invalid && !customerForm.female_household_members.$pristine }">
+                            <label class="col-sm-4 control-label">Female household members</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <input type="number" min=0 class="form-control" ng-model="customer.customer.female_household_members" name="female_household_members" required>
+                                <span ng-show="customerForm.female_household_members.$error.required && !customerForm.female_household_members.$pristine" class="help-block">The number of female household member is required.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h4 class="text-center">Address</h4>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.division.$invalid && !customerForm.division.$pristine }">
+                            <label class="col-sm-4 control-label">Division</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <select class="form-control" id="divisionSelect" name="division" ng-model="customer_location.selectedDiv" ng-options="division as division.name for division in divisions track by division.id" required>
+                                    <option value=''>Select</option>
+                                </select>
+                                <span ng-show="customerForm.division.$error.required && !customerForm.division.$pristine" class="help-block">The division is required.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.district.$invalid && !customerForm.district.$pristine }">
+                            <label class="col-sm-4 control-label">District</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <select class="form-control" id="districtSelect" name="district" ng-model="customer_location.selectedDis" ng-options="district as district.name for district in districts | filter: { division_id: customer_location.selectedDiv.id, }  track by district.id" ng-disabled="!customer_location.selectedDiv" required>
+                                    <option value=''>Select</option>
+                                </select>
+                                <span ng-show="customerForm.district.$error.required && !customerForm.district.$pristine" class="help-block">The district is required.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.upazila.$invalid && !customerForm.upazila.$pristine }">
+                            <label class="col-sm-4 control-label">Upazila</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <select class="form-control" id="upazilaSelect" name="upazila" ng-model="customer_location.selectedUpa" ng-options="upazila as upazila.name for upazila in upazilas | filter: { district_id: customer_location.selectedDis.id, }  track by upazila.id" ng-disabled="!customer_location.selectedDis" required>
+                                    <option value=''>Select</option>
+                                </select>
+                                <span ng-show="customerForm.upazila.$error.required && !customerForm.upazila.$pristine" class="help-block">The upazila is required.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.village.$invalid && !customerForm.village.$pristine }">
+                            <label class="col-sm-4 control-label">Village</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <input type="text" class="form-control" name="village" ng-model="customer.address.village" required>
+                                <span ng-show="customerForm.village.$error.required && !customerForm.village.$pristine" class="help-block">The village is required.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.ward.$invalid && !customerForm.ward.$pristine }">
+                            <label class="col-sm-4 control-label">Ward</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <input type="number" min=0 class="form-control" ng-model="customer.address.ward" name="ward" required>
+                                <span ng-show="customerForm.ward.$error.required && !customerForm.ward.$pristine" class="help-block">The ward is required.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : customerForm.union_parished.$invalid && !customerForm.union_parished.$pristine }">
+                            <label class="col-sm-4 control-label">Union Parishad</label>
+                            <div class="col-sm-6 col-md-8 col-lg-6">
+                                <input type="text" class="form-control" name="union_parished" ng-model="customer.address.union_parishad" required>
+                                <span ng-show="customerForm.union_parished.$error.required && !customerForm.union_parished.$pristine" class="help-block">The union is required.</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="text-right">
+                    <button type="submit" class="btn btn-info" ng-disabled="customerForm.$invalid">Next</button>
+                    <button type="button" class="btn btn-info" ng-click="customerForm.$setPristine(true); reset()">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

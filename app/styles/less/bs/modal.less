@@ -1,0 +1,131 @@
+/* $modal
+ ------------------------------------------*/
+
+.modal {
+  z-index: @zindex-modal;
+  background: black;
+  background: fade(black, 40%);
+}
+
+.modal-content {
+  .box-shadow(none);
+  .rounded(0px);
+}
+
+.modal .modal-dialog,
+.modal.in .modal-dialog {
+  .animation-duration(800ms);
+  .animation-timing-function(linear);
+  .animation-fill-mode(forwards);
+}
+
+.modal .modal-dialog {
+  .animation-name(animation-close);
+  .animation-duration(@transition-duration);
+  .animation-timing-function(ease-out);
+  .translate(0, 0);
+}
+
+.modal.in .modal-dialog {
+  .animation-name(animation-open);
+}
+
+.view-header {
+  background-color: @brand-primary;
+  color: white;
+  width: 100%;
+
+  .modal-title {
+    text-align: center;
+  }
+
+  .close{
+    color: white;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  .edit, .delete{
+    position: absolute;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1;
+    color: white;
+    text-shadow: 0 1px 0 #fff;
+    .opacity(.5);
+
+    &:hover,
+    &:focus {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+        .opacity(1);
+    }
+
+    button& {
+        padding: 0;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        -webkit-appearance: none;
+    }
+  }
+
+  button.edit, button.delete{
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+  }
+
+  .edit{
+    top: 6px;
+    right: 15px;
+  }
+
+  .delete{
+    top: 5px;
+    right: 43px;
+  }
+
+  .title_icon{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    height: 100px;
+  }
+}
+.view-body {
+  .view-group {
+    display: flex;
+    justify-content: center;
+
+    &.not_first {
+      margin-top: 16px;
+    }
+
+    .value {
+      align-self: center;
+    }
+
+    .body_icon {
+      height: 40px;
+    }
+  }
+
+  .horizontal-bar {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 1px;
+      left: 18%;
+      right: 18%;
+      border-bottom: 1px solid fade(black, 6%);
+    }
+  }
+}

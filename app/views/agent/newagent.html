@@ -1,0 +1,159 @@
+<ul class="nav nav-tabs">
+    <li ng-repeat="step in steps" ng-class="{active: $index==fact.getCurrentStepIndex(this)}">
+        <a href>{{step}}</a>
+    </li>
+</ul>
+<div ng-switch on="selection" class="panel">
+    <!-- First Step -->
+    <div ng-switch-when="Information" class="animated fadeIn">
+        <form name="agentForm" ng-submit="nextStep()" novalidate>
+            <div class="panel-body">
+                <div class="main_div row">
+                    <div class="col-md-6">
+                        <h4 class="text-center">General Information</h4>
+                        <div class="form-group" ng-class="{ 'has-error' : agentForm.first_name.$invalid && !agentForm.first_name.$pristine }">
+                            <label class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="first_name" class="form-control" ng-model="agent_names.first_name" required>
+                                <p ng-show="agentForm.first_name.$invalid && !agentForm.first_name.$pristine" class="help-block">The first name is required.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error' : agentForm.last_name.$invalid && !agentForm.last_name.$pristine }">
+                            <label class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="last_name" class="form-control" ng-model="agent_names.last_name" required>
+                                <p ng-show="agentForm.last_name.$invalid && !agentForm.last_name.$pristine" class="help-block">The last name is required.</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : agentForm.gender.$invalid && !agentForm.gender.$pristine }">
+                            <label class="col-sm-3 control-label">Gender</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="gender" ng-model="agent.gender_id" required>
+                                        <option value=''>Select</option>
+                                        <option value='1'>Female</option>
+                                        <option value='2'>Male</option>
+                                    </select>
+                                <p ng-show="agentForm.gender.$error.required && !agentForm.gender.$pristine" class="help-block">The gender is required.</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : agentForm.phone.$invalid && !agentForm.phone.$pristine }">
+                            <label class="col-sm-3 control-label">Telephone</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="phone" ng-model="agent.phone" required ng-pattern="/0[0-9]{5,9}/">
+                                <span ng-show="agentForm.phone.$error.required && !agentForm.phone.$pristine" class="help-block">The telephone number is required.</span>
+                                <span ng-show="agentForm.phone.$error.pattern && !agentForm.phone.$pristine" class="help-block">The telephone number is not correct.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : agentForm.pin_code.$invalid && !agentForm.pin_code.$pristine }">
+                            <label class="col-sm-3 control-label">PIN code</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="pin_code" ng-model="agent.pin_code" placeholder="1234" required maxlength="4"
+                                    ng-minlength="4" />
+                                <span ng-show="agentForm.pin_code.$error.required && !agentForm.pin_code.$pristine" class="help-block">The PIN code is required.</span>
+                                <span ng-show="agentForm.pin_code.$error.minlength && !agentForm.pin_code.$pristine" class="help-block">The PIN code must be 4 digits.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : agentForm.dob.$invalid && !agentForm.dob.$pristine }" style="overflow: visible; height: 44px;">
+                            <label class="col-sm-3 control-label" for="dob">Date of Birth</label>
+                            <div class="col-sm-8">
+                                <p class="input-group">
+                                    <span class="input-group-addon">Optional</span>
+                                    <input type="text" class="form-control" uib-datepicker-popup ng-model="agent.date_of_birth" is-open="popupDOB.opened" show-button-bar="false"
+                                    />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openDOB()"><i class="fa fa-calendar"></i></button>
+                                      </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : agentForm.email.$invalid && !agentForm.email.$pristine }">
+                            <label class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-8">
+                                <p class="input-group">
+                                    <span class="input-group-addon">Optional</span>
+                                    <input type="email" class="form-control" name="email" ng-model="agent.email">
+                                </p>
+                                <span ng-show="agentForm.email.$error.email && !agentForm.email.$pristine" class="help-block">The email address is not correct.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h4 class="text-center">Office</h4>
+                        <div class="form-group pt5" ng-class="{ 'has-error' : agentForm.regional_office.$invalid && !agentForm.regional_office.$pristine }">
+                            <label class="col-sm-3 control-label">Regional Office</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="regional_officeSelect" name="regional_office" ng-model="selectedRegionalOffice" ng-options="regional_office as regional_office.name for regional_office in regionalOffices track by regional_office.id"
+                                    required>
+                                        <option value=''>Select</option>
+                                    </select>
+                                <span ng-show="agentForm.regional_office.$error.required && !agentForm.regional_office.$pristine" class="help-block">The regional office is required.</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : agentForm.branch_office.$invalid && !agentForm.branch_office.$pristine }">
+                            <label class="col-sm-3 control-label">Branch Office</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="branch_officeSelect" name="branch_office" ng-model="selectedBranchOffice" ng-options="branch_office as branch_office.name for branch_office in branchOffices[selectedRegionalOffice.id] track by branch_office.id"
+                                    ng-disabled="!selectedRegionalOffice" required>
+                                        <option value=''>Select</option>
+                                    </select>
+                                <span ng-show="agentForm.branch_office.$error.required && !agentForm.branch_office.$pristine" class="help-block">The branch office is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="text-right">
+                    <button type="submit" class="btn btn-info" ng-disabled="agentForm.$invalid">Next</button>
+                    <button type="button" class="btn btn-info" ng-click="agentForm.$setPristine(true);
+                                                                            agent={}; agent_names={}; selectedDis='';
+                                                                            selectedDiv=''; selectedUpa='';">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Second Step -->
+    <div ng-switch-when="Validation" class="animated fadeIn">
+        <form name="agentPasswordForm" ng-submit="nextStep()" novalidate>
+            <div class="panel-body">
+                <div class="alert_div col-sm-6">
+                    <h4>Create a new agent</h4>
+                    <p>You are about to create a new agent,<br> please enter your password before proceeding.</p>
+                    <div class="form-group" ng-class="{ 'has-error' : (agentPasswordForm.password.$invalid && !agentPasswordForm.password.$pristine) || !passwordMatch }">
+                        <div class="password_field">
+                            <input type="password" class="form-control" ng-model="password.password" placeholder="Password" name="password" required>
+                            <p ng-show="(agentPasswordForm.password.$error.required && !agentPasswordForm.password.$pristine) || !passwordMatch" class="help-block">Invalid password</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="text-right">
+                    <button type="button" class="btn btn-info" data-ng-click="previousStep()">Previous</button>
+                    <button type="submit" class="btn btn-info" ng-disabled="agentPasswordForm.$invalid">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Third Step -->
+    <div ng-switch-when="Confirmation" class="animated fadeIn">
+        <div class="panel-body">
+            <div class="alert_div col-sm-6">
+                <h4>A new agent has been created!</h4>
+                <p>Agent name: {{createdAgent.name}}<br> Agent Id: {{createdAgent.id}}</p>
+                <p>
+                    Attention! The Agent will remain inactive until activation from the app is done
+                </p>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="text-right">
+                <button type="button" class="btn btn-info" ng-click="goBack()">Back</button>
+            </div>
+        </div>
+    </div>
+ </div>   

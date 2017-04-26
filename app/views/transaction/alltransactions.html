@@ -1,0 +1,59 @@
+<div class="panel">
+    <div class="panel-heading border">
+        <ol class="breadcrumb mb0 no-padding">
+            <li>
+                <a href="#/">Home</a>
+            </li>
+            <li>
+                <a href>Transactions</a>
+            </li>
+        </ol>
+    </div>
+
+    <div class="panel-heading">
+        <div class="form-group col-sm-3">
+            <label for="dateRange"><b>Date Range:</b></label>
+            <input name="dateRange" date-range-picker class="form-control date-picker" type="text" placeholder="Date range" ng-model="datePicker.date" clearable="true" ng-change="console.log(datePicker.date)" options="datePicker.opts" />
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="paymentTypeSelect"><b>Payment Mode</b></label>
+            <select class="form-control" name="paymentTypeSelect" ng-model="paymentType" ng-change="filterPaymentType()">
+                <option value="">All</option>
+                <option value="CashPayment">Cash</option>
+                <option value="MobileMoney">Mobile Money</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="branchOfficeSelect"><b>Regional Office</b></label>
+            <select class="form-control" id="regional_officeSelect" name="regional_office" ng-model="selectedRegionalOffice" ng-options="regional_office as regional_office.name for regional_office in regionalOffices track by regional_office.id" ng-change="filterRegionalOffice()">
+                <option value=''>All</option>
+           </select>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="branchOfficeSelect"><b>Branch Office</b></label>
+            <select class="form-control" id="branch_officeSelect" name="branch_office" ng-model="selectedBranchOffice" ng-options="branch_office as branch_office.name for branch_office in branchOffices[selectedRegionalOffice.id] track by branch_office.id" ng-disabled="!selectedRegionalOffice"
+                ng-change="filterBranchOffice()">
+                <option value=''>All</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+        <table datatable="" dt-options="allTransactionsCtrl.dtOptions" dt-columns="allTransactionsCtrl.dtColumns" dt-instance="allTransactionsCtrl.dtInstanceCallback" class="table table-bordered table-striped" width="100%">
+            <tfoot>
+                <tr></tr>
+                <tr>
+                    <th style="text-align:right">Page Total:
+                        <span>{{ pageSum | number }} Tk</span>
+                    </th>
+                </tr>
+                <tr>
+                    <th style="text-align:right">Total:
+                        <span>{{ sum | number }} Tk</span>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
